@@ -16,6 +16,7 @@ import org.xedox.utils.ErrorDialog;
 import org.xedox.utils.OverflowMenu;
 
 public class EditorManager {
+    
     private final EditorActivity context;
     private final TabLayout tabLayout;
     private final ViewPager2 viewPager;
@@ -49,7 +50,6 @@ public class EditorManager {
     }
 
     private void showTabContextMenu(View anchor, int position) {
-
         OverflowMenu.show(
                 context,
                 anchor,
@@ -64,13 +64,13 @@ public class EditorManager {
 
         try {
             if (id == R.id.close_it) {
-                closeFile(position);
+                editorAdapter.closeFile(position);
                 return true;
             } else if (id == R.id.close_other) {
-                closeOtherFiles(position);
+                editorAdapter.closeOtherFiles(position);
                 return true;
             } else if (id == R.id.close_all) {
-                closeAllFiles();
+                editorAdapter.closeAllFiles();
                 return true;
             } 
         } catch (Exception e) {
@@ -94,62 +94,7 @@ public class EditorManager {
             viewPager.setCurrentItem(position, false);
         }
     }
-
-    public void closeFile(int position) {
-        FileFragment fragment = editorAdapter.getFragment(position);
-        if (fragment.hasUnsavedChanges()) {
-            showSaveDialog(position);
-        } else {
-            editorAdapter.removeFragment(position);
-        }
-    }
-
-    private void showSaveDialog(int position) {
-        new DialogBuilder(context)
-                .setTitle(R.string.unsaved_changes)
-                .setMessage(
-                        context.getString(R.string.do_you_want_to_save_changes_to)
-                                + editorAdapter.getFragment(position).getFile().getName()
-                                + "?")
-                .setPositiveButton(
-                        R.string.save,
-                        (d, w) -> {
-                            editorAdapter.getFragment(position).save();
-                            editorAdapter.removeFragment(position);
-                            d.dismiss();
-                        })
-                .setNegativeButton(
-                        R.string.dont_save,
-                        (d, w) -> {
-                            editorAdapter.removeFragment(position);
-                            d.dismiss();
-                        })
-                .setNeutralButton(R.string.cancel, (d, w) -> d.dismiss())
-                .show();
-    }
-
-    public void closeOtherFiles(int currentPosition) {
-        for (int i = editorAdapter.getItemCount() - 1; i >= 0; i--) {
-            if (i != currentPosition) {
-                closeFile(i);
-            }
-        }
-    }
-
-    public void closeAllFiles() {
-        for (int i = editorAdapter.getItemCount() - 1; i >= 0; i--) {
-            closeFile(i);
-        }
-    }
-
-    public void saveFile(int position) {
-        editorAdapter.getFragment(position).save();
-    }
-
-    public void saveAllFiles() {
-        editorAdapter.saveAll();
-    }
-
+    
     private void updateUIState(boolean hasFiles) {
         emptyEditorView.setVisibility(hasFiles ? View.GONE : View.VISIBLE);
         viewPager.setVisibility(hasFiles ? View.VISIBLE : View.GONE);
@@ -169,7 +114,8 @@ public class EditorManager {
 
     private boolean hasUnsavedChanges() {
         for (int i = 0; i < editorAdapter.getItemCount(); i++) {
-            if (editorAdapter.getFragment(i).hasUnsavedChanges()) {
+            FileFragment fileFragment = (FileFragment) editorAdapter.getFragment(i);
+            if (fileFragment.hasUnsavedChanges()) {
                 return true;
             }
         }
@@ -183,7 +129,7 @@ public class EditorManager {
                 .setPositiveButton(
                         R.string.save,
                         (d, w) -> {
-                            saveAllFiles();
+                            editorAdapter.saveAll();
                             context.finish();
                             d.dismiss();
                         })

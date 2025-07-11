@@ -50,10 +50,6 @@ public class AppCore extends Application {
         return PROJECTS;
     }
     
-    public static IFile pluginsDir() {
-    	return PLUGINS;
-    }
-
     public static String string(int res) {
         return appContext.getString(res);
     }
