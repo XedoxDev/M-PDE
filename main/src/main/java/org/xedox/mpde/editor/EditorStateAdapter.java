@@ -10,8 +10,8 @@ import java.util.List;
 import org.xedox.utils.BaseFragment;
 
 public class EditorStateAdapter extends FragmentStateAdapter {
-    
-    private final List<BaseFragment> fragments = new ArrayList<>();
+
+    private List<BaseFragment> fragments = new ArrayList<>();
     private OnChangeListener onChangeListener;
 
     public interface OnChangeListener {
@@ -35,13 +35,15 @@ public class EditorStateAdapter extends FragmentStateAdapter {
 
     public void addFragment(@NonNull BaseFragment fragment) {
         fragments.add(fragment);
-        notifyItemInserted(fragments.size() - 1);
+        // notifyItemInserted(fragments.size() - 1);
+        notifyDataSetChanged();
         notifyChange();
     }
 
     public void removeFragment(int position) {
         fragments.remove(position);
-        notifyItemRemoved(position);
+        // notifyItemRemoved(position);
+        notifyDataSetChanged();
         notifyChange();
     }
 
@@ -53,7 +55,8 @@ public class EditorStateAdapter extends FragmentStateAdapter {
     public void clear() {
         int size = fragments.size();
         fragments.clear();
-        notifyItemRangeRemoved(0, size);
+        // notifyItemRangeRemoved(0, size);
+        notifyDataSetChanged();
         notifyChange();
     }
 
@@ -92,7 +95,8 @@ public class EditorStateAdapter extends FragmentStateAdapter {
         }
         int size = fragments.size();
         fragments.clear();
-        notifyItemRangeRemoved(0, size);
+        // notifyItemRangeRemoved(0, size);
+        notifyDataSetChanged();
         notifyChange();
     }
 
@@ -109,6 +113,21 @@ public class EditorStateAdapter extends FragmentStateAdapter {
 
     public int indexOf(BaseFragment fragment) {
         return fragments.indexOf(fragment);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return fragments.get(position).hashCode();
+    }
+
+    @Override
+    public boolean containsItem(long itemId) {
+        for (BaseFragment fragment : fragments) {
+            if (fragment.hashCode() == itemId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean containsFile(@NonNull File file) {
@@ -138,6 +157,7 @@ public class EditorStateAdapter extends FragmentStateAdapter {
 
     public void setOnChangeListener(OnChangeListener listener) {
         this.onChangeListener = listener;
+        notifyChange();
     }
 
     private void notifyChange() {

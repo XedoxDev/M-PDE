@@ -28,6 +28,7 @@ import org.xedox.utils.io.IFile;
 import org.xedox.utils.BaseFragment;
 
 public class FileFragment extends BaseFragment {
+    
     private static final Map<String, String> EXTENSION_MAPPING = new HashMap<>();
     private static final Handler handler = new Handler(Looper.getMainLooper());
 

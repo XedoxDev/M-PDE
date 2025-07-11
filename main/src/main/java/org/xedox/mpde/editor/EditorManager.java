@@ -32,9 +32,7 @@ public class EditorManager {
 
         editorAdapter = new EditorStateAdapter(context);
         editorAdapter.setOnChangeListener(count -> updateUIState(count > 0));
-
         viewPager.setAdapter(editorAdapter);
-        viewPager.setOffscreenPageLimit(1);
         viewPager.setUserInputEnabled(false);
         tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager, this::setupTab);
         tabLayoutMediator.attach();
@@ -85,16 +83,16 @@ public class EditorManager {
             try {
                 FileFragment fragment = FileFragment.newInstance(file);
                 editorAdapter.addFragment(fragment);
-                viewPager.setCurrentItem(editorAdapter.getItemCount() - 1, false);
+                viewPager.setCurrentItem(editorAdapter.getItemCount() - 1);
             } catch (Exception e) {
                 ErrorDialog.show(context, "Failed to open file", e);
             }
         } else {
             int position = editorAdapter.findFragmentPosition(file);
-            viewPager.setCurrentItem(position, false);
+            viewPager.setCurrentItem(position);
         }
     }
-    
+   
     private void updateUIState(boolean hasFiles) {
         emptyEditorView.setVisibility(hasFiles ? View.GONE : View.VISIBLE);
         viewPager.setVisibility(hasFiles ? View.VISIBLE : View.GONE);
