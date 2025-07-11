@@ -137,6 +137,7 @@ public class FileTreeAdapter extends RecyclerView.Adapter<FileTreeAdapter.VH> {
         } else {
             setupFolderIcon(holder, node);
         }
+        node.icon = holder.icon.getDrawable();
 
         holder.parent.setOnClickListener(
                 v -> {

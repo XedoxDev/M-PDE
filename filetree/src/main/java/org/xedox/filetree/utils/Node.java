@@ -1,5 +1,6 @@
 package org.xedox.filetree.utils;
 
+import android.graphics.drawable.Drawable;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class Node implements Serializable {
     public int id;
 
     public static int idCount = 0;
+    
+    public Drawable icon;
 
     public Node() {
         name = "";

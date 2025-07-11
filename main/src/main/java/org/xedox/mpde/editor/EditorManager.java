@@ -1,6 +1,7 @@
 package org.xedox.mpde.editor;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.MenuItem;
 import android.view.View;
 import androidx.viewpager2.widget.ViewPager2;
@@ -41,6 +42,7 @@ public class EditorManager {
     private void setupTab(TabLayout.Tab tab, int position) {
         FileFragment fragment = editorAdapter.getFragment(position);
         tab.setText(fragment.getFile().getName());
+        tab.setIcon(fragment.getIcon());
         fragment.setOnEditorTextChangeListener((e, f) -> {
             tab.setText(fragment.getTitle());
         });
@@ -48,6 +50,7 @@ public class EditorManager {
     }
 
     private void showTabContextMenu(View anchor, int position) {
+        if(viewPager.getCurrentItem() == position) return;
         OverflowMenu.show(
                 context,
                 anchor,
@@ -79,9 +82,13 @@ public class EditorManager {
     }
 
     public void openFile(File file) {
+        openFile(file, context.getDrawable(org.xedox.filetree.R.drawable.file));
+    }
+    
+    public void openFile(File file, Drawable icon) {
         if (!editorAdapter.containsFile(file)) {
             try {
-                FileFragment fragment = FileFragment.newInstance(file);
+                FileFragment fragment = FileFragment.newInstance(file, icon);
                 editorAdapter.addFragment(fragment);
                 viewPager.setCurrentItem(editorAdapter.getItemCount() - 1);
             } catch (Exception e) {

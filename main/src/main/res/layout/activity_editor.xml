@@ -35,7 +35,8 @@
                     android:id="@+id/editor_tab_layout"
                     app:tabGravity="start"
                     app:tabMode="scrollable"
-                    android:background="@color/background" />
+                    android:background="@color/background"
+                    app:tabInlineLabel="true" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/editor_pager"

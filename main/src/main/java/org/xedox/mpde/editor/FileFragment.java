@@ -1,5 +1,6 @@
 package org.xedox.mpde.editor;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -22,13 +23,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import org.xedox.mpde.R;
 import org.xedox.utils.ErrorDialog;
 import org.xedox.utils.io.FileX;
 import org.xedox.utils.io.IFile;
 import org.xedox.utils.BaseFragment;
 
 public class FileFragment extends BaseFragment {
-    
+
     private static final Map<String, String> EXTENSION_MAPPING = new HashMap<>();
     private static final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -39,6 +41,7 @@ public class FileFragment extends BaseFragment {
     private SubscriptionReceipt<ContentChangeEvent> contentChangeSubscriber;
     private boolean isModified = false;
     private OnEditorTextChangeListener onEditorTextChangeListener;
+    private Drawable icon;
 
     public static interface OnEditorTextChangeListener {
         void onChange(SoraEditor editor, File file);
@@ -53,8 +56,14 @@ public class FileFragment extends BaseFragment {
     }
 
     public static FileFragment newInstance(File file) {
+        return newInstance(file, null);
+    }
+    
+    public static FileFragment newInstance(File file, Drawable icon) {
         FileFragment fragment = new FileFragment();
         fragment.setFile(file);
+        if(icon != null) 
+        fragment.setIcon(icon);
         return fragment;
     }
 
@@ -183,5 +192,13 @@ public class FileFragment extends BaseFragment {
     @Override
     public String getTitle() {
         return title;
+    }
+
+    public Drawable getIcon() {
+        return this.icon;
+    }
+
+    public void setIcon(Drawable icon) {
+        this.icon = icon;
     }
 }

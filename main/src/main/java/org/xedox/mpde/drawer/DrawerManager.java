@@ -146,7 +146,7 @@ public class DrawerManager extends BaseDrawerManager {
                                         (item) -> handleOnFileLongClickMenu(item, node, file));
                             });
                     fileTree.setOnFileClickListener(
-                            (node, file, view) -> editorManager.openFile(file));
+                            (node, file, view) -> editorManager.openFile(file, node.icon));
                     initFileTreeIcons();
                     context.loadFileTree(fileTree);
                 });
