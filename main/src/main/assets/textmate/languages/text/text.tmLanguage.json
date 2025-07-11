@@ -1,0 +1,16 @@
+{
+    "name": "Plain Text",
+    "scopeName": "source.txt",
+    "patterns": [
+        {
+            "name": "string.quoted.double.txt",
+            "match": "\"[^\"]*\"",
+            "scope": "string.quoted.double"
+        },
+        {
+            "name": "string.quoted.single.txt",
+            "match": "'[^']*'",
+            "scope": "string.quoted.single"
+        }
+    ]
+}

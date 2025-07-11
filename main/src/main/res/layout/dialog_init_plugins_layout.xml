@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_toLeftOf="@+id/progress"
+        android:textSize="20sp" />
+
+    <ProgressBar
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/progress" />
+
+</RelativeLayout>

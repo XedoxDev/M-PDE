@@ -1,0 +1,20 @@
+plugins {
+    id 'com.android.application' version '8.10.0' apply false
+    id 'com.android.library' version '8.10.0' apply false
+         
+}
+
+allprojects {
+    ext {
+        app_compat_verison = "1.7.0"
+        material3_verison = "1.13.0-alpha01"
+        sora_editor_verison = "0.23.5"
+        desugar_jdk_libs = "2.1.5"
+        gson_verison = "2.13.1"
+        zip4j_version = "2.11.5"
+    }
+}
+    
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

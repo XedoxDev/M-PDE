@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MPDE</string>
+    <string name="no_open_files">No open files</string>
+    <string name="file_tree">File Tree</string>
+    <string name="delete">Delete</string>
+    <string name="rename">Rename</string>
+    <string name="close_it">Close it</string>
+    <string name="close_other">Close other</string>
+    <string name="close_all">Close all</string>
+    <string name="save">Save</string>
+    <string name="create">Create</string>
+    <string name="open_in_other_app">Open in external app</string>
+    <string name="create_new_file_folder">Create new File/Folder</string>
+    <string name="cancel">Cancel</string>
+     <string name="dont_save">Don\'t save</string>
+     <string name="do_you_want_to_save_changes_to">Do you want to save changes to</string>
+     <string name="close_without_save">Close without saving</string>
+     <string name="unsaved_changes">Unsaved changes</string>
+     <string name="unsaved_changes_message">"You have unsaved changes. Save before exiting?"</string>
+    <string name="rename_file_folder">Rename File/Folder</string>
+    <string name="create_file_folder">Create File/Folder</string>
+    <string name="file_name">File name</string>
+    <string name="loading_plugins">Loading plugins</string>
+    <string name="create_file_hint">Folder: use \'/\' for divide pathes.</string>
+    <string name="name_cannot_be_empty">Name cannot be empty!</string>
+    <string name="file_already_exists">File already exists!</string>
+    <string name="folder_already_exists">Folder already exists!</string>
+    <string name="import_file">Import file</string>
+    <string name="file">File</string>
+    <string name="folder">Folder</string>
+    <string name="open_as_project">Open as project</string>
+    <string name="run_type">Build type</string>
+    <string name="preview">Preview</string>
+    <string name="run">Run</string>
+</resources>

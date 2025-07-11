@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/run"
+        android:title="@string/run"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/play" />
+    <item
+        android:id="@+id/save"
+        android:title="@string/save"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/save" />
+
+    <item
+        android:id="@+id/run_type"
+        android:title="@string/run_type"
+        android:icon="@drawable/code_tags"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/preview"
+                    android:title="@string/preview"
+                    android:checkable="true"
+                    android:icon="@drawable/code_tags" />
+            </group>
+        </menu>
+    </item>
+</menu>
