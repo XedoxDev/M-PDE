@@ -1,8 +1,10 @@
 {
 	"information_for_contributors": [
-		"This file has been copied from https://github.com/microsoft/vscode/blob/b37252c18238fffcebdc9fd7680f1dabea3a50a0/extensions/java/syntaxes/java.tmLanguage.json",
-		"The source location lists https://github.com/atom/language-java/blob/29f977dc42a7e2568b39bb6fb34c4ef108eb59b3/LICENSE.md as the original repository. It is therefore licensed under MIT."
+		"This file has been converted from https://github.com/redhat-developer/vscode-java/blob/master/language-support/java/java.tmLanguage.json",
+		"If you want to provide a fix or improvement, please create a pull request against the original repository.",
+		"Once accepted there, we are happy to receive an update request."
 	],
+	"version": "https://github.com/redhat-developer/vscode-java/commit/f09b712f5d6d6339e765f58c8dfab3f78a378183",
 	"name": "Java",
 	"scopeName": "source.java",
 	"patterns": [

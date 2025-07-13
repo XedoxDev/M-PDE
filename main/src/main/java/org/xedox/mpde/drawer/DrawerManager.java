@@ -155,7 +155,7 @@ public class DrawerManager extends BaseDrawerManager {
     private void initFileTreeIcons() {
         fileTree.setIcon(".json", R.drawable.json);
         fileTree.setIcon(".java", R.drawable.java);
-        fileTree.setIcon(".pde", R.drawable.java);
+        fileTree.setIcon(".pde", R.drawable.processing);
     }
 
     protected void handleOnFileLongClickMenu(MenuItem item, Node node, File file) {

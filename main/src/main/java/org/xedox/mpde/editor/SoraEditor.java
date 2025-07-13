@@ -60,4 +60,76 @@ public class SoraEditor extends CodeEditor {
     public String getStringText() {
         return getText().toString();
     }
+    
+    protected void scrollToEnd() {
+        int lastLine = getText().getLineCount() - 1;
+        ensurePositionVisible(lastLine, 0);
+    }
+
+    public void clear() {
+        getText().replace(0, getText().length(), "");
+    }
+
+
+    public static class PrintStream extends java.io.PrintStream {
+        private final SoraEditor editor;
+        private final StringBuilder buffer = new StringBuilder();
+        private static final int FLUSH_LIMIT = 1024;
+
+        public PrintStream(SoraEditor editor) {
+            super(System.out);
+            this.editor = editor;
+        }
+
+        @Override
+        public void write(int b) {
+            buffer.append((char) b);
+            checkFlush();
+        }
+
+        @Override
+        public void write(byte[] buf, int off, int len) {
+            buffer.append(new String(buf, off, len));
+            checkFlush();
+        }
+
+        @Override
+        public void println() {
+            write('\n');
+        }
+
+        @Override
+        public void println(String x) {
+            print(x);
+            println();
+        }
+
+        @Override
+        public void print(String s) {
+            if (s == null) {
+                s = "null";
+            }
+            write(s.getBytes(), 0, s.length());
+        }
+
+        private void checkFlush() {
+            if (buffer.length() >= FLUSH_LIMIT) {
+                flush();
+            }
+        }
+
+        @Override
+        public void flush() {
+            if (buffer.length() > 0) {
+                final String text = buffer.toString();
+                editor.post(() -> editor.append(text));
+                buffer.setLength(0);
+            }
+        }
+
+        @Override
+        public void close() {
+            flush();
+        }
+    }
 }

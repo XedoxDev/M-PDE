@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/root">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@id/header"
+        android:background="@color/background"
+        android:orientation="vertical"
+        android:id="@+id/content">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:id="@+id/tab_layout" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/tabs_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/header">
+
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider" />
+            
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="6dp">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/on_surface"
+                android:text="@string/console"
+                android:id="@+id/title" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/hint"
+                android:text="@string/console_help"
+                android:id="@+id/subtitle" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

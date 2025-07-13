@@ -50,7 +50,7 @@ public class EditorManager {
     }
 
     private void showTabContextMenu(View anchor, int position) {
-        if(viewPager.getCurrentItem() == position) return;
+        if(viewPager.getCurrentItem() != position) return;
         OverflowMenu.show(
                 context,
                 anchor,

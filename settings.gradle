@@ -20,3 +20,4 @@ rootProject.name = "M-PDE"
 include(":main")
 include(":filetree")
 include(":utils")
+include(":javac", ":apkbuilder")

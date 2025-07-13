@@ -28,6 +28,7 @@
     <color name="surface_highest">#3E3E42</color>
     
     <color name="hint">#565656</color>
+    <color name="divider">#3C3C3C</color>
     <color name="tint">#FFFFFF</color>
     <color name="tint_disable">#565656</color>
 </resources>
