@@ -16,7 +16,8 @@
         <com.google.android.material.tabs.TabLayout
             android:layout_height="30dp"
             android:layout_width="match_parent"
-            android:id="@+id/tab_layout" />
+            android:id="@+id/tab_layout"
+            android:background="@color/background" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:layout_height="match_parent"
@@ -37,7 +38,7 @@
             android:layout_height="1dp"
             android:layout_width="match_parent"
             android:background="@color/divider" />
-            
+
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -48,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/on_surface"
-                android:text="@string/console"
+                android:text="@string/tool_window"
                 android:id="@+id/title" />
 
             <TextView
@@ -56,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@color/hint"
-                android:text="@string/console_help"
+                android:text="@string/tool_window_hint"
                 android:id="@+id/subtitle" />
         </LinearLayout>
     </LinearLayout>

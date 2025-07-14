@@ -11,8 +11,8 @@
     <string name="save">Save</string>
     <string name="build_logs">Build logs</string>
     <string name="create">Create</string>
-    <string name="console_help">Swipe up for open output</string>
-    <string name="console">Console</string>
+    <string name="tool_window_hint">Swipe up for open output</string>
+    <string name="tool_window">Tool window</string>
     <string name="open_in_other_app">Open in external app</string>
     <string name="create_new_file_folder">Create new File/Folder</string>
     <string name="cancel">Cancel</string>

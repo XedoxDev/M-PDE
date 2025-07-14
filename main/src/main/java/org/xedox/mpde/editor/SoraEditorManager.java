@@ -182,7 +182,9 @@ public class SoraEditorManager {
                 language.name = name;
                 language.scopeName = scope;
                 language.grammar = tmLanguageFile.getFullPath();
-                language.languageConfiguration = configurationFile.getFullPath();
+                if (configurationFile.exists()) {
+                    language.languageConfiguration = configurationFile.getFullPath();
+                }
 
                 languages.add(language);
             } catch (Exception e) {

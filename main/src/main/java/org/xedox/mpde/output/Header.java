@@ -58,13 +58,11 @@ public class Header {
             finalY = 0;
         }
 
-        if (parentView != null) {
-            int parentHeight = parentView.getHeight();
-            int viewHeight = getHeight();
+        int parentHeight = parentView.getHeight();
+        int viewHeight = getHeight();
 
-            if (viewHeight > 0 && parentHeight > 0 && finalY > parentHeight - viewHeight) {
-                finalY = parentHeight - viewHeight;
-            }
+        if (finalY > parentHeight - viewHeight) {
+            finalY = parentHeight - viewHeight;
         }
 
         view.setTranslationY(finalY);

@@ -16,6 +16,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public String getTitle() {
-        return "";
+        return "NULL TITLE";
     }
 }

@@ -1,0 +1,76 @@
+// Use for tasker in apkbuilder module
+
+{
+  "name": "LogCat",
+  "version": "0.0.1",
+  "scopeName": "source.log",
+  "patterns": [
+    {
+      "name": "token.task-header",
+      "match": "^\\s*:Task\\s.+$",
+      "settings": {
+        "foreground": "#4FC1FF",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "token.task-success",
+      "match": "^\\s*Completed:\\s.+?\\(\\d+ms\\)$",
+      "settings": {
+        "foreground": "#73C990",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "token.task-failure",
+      "match": "^\\s*Failed:\\s.+?\\(\\d+ms\\)$",
+      "settings": {
+        "foreground": "#F44747",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "token.error-token",
+      "match": "^\\s*\\[ERROR\\]\\s.+$",
+      "settings": {
+        "foreground": "#F44747"
+      }
+    },
+    {
+      "name": "token.warn-token",
+      "match": "^\\s*\\[WARN\\]\\s.+$",
+      "settings": {
+        "foreground": "#FFCC00"
+      }
+    },
+    {
+      "name": "token.debug-token",
+      "match": "^\\s*\\[DEBUG\\]\\s.+$",
+      "settings": {
+        "foreground": "#BEB7FF"
+      }
+    },
+    {
+      "name": "token.execution-summary",
+      "match": "^=== Execution Summary ===$",
+      "settings": {
+        "foreground": "#4FC1FF",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "token.statistics",
+      "match": "^Tasks: \\d+ successful, \\d+ failed, \\d+ warnings \\| Total time: \\d+ms$",
+      "settings": {
+        "foreground": "#DCDCAA"
+      }
+    },
+    {
+      "name": "token.time-millis",
+      "match": "\\(\\d+ms\\)",
+      "settings": {
+        "foreground": "#CE9178"
+      }
+    }
+  ]
+}

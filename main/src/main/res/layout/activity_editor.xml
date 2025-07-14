@@ -47,7 +47,7 @@
             </RelativeLayout>
 
         </RelativeLayout>
-        <org.xedox.mpde.output.OutputView
+        <org.xedox.mpde.output.ToolsView
             android:id="@+id/console_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
