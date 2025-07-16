@@ -13,21 +13,24 @@ public class OverflowMenu {
         MenuInflater inflater = menu.getMenuInflater();
         inflater.inflate(menuId, menu.getMenu());
 
-        menu.setOnMenuItemClickListener(item -> {
-            if (oicl != null) {
-                oicl.onItemClick(item);
-                return true;
-            }
-            return false;
-        });
+        menu.setOnMenuItemClickListener(
+                item -> {
+                    if (oicl != null) {
+                        oicl.onItemClick(item);
+                        return true;
+                    }
+                    return false;
+                });
 
+        // NOTE: This need for show icons //
         try {
             java.lang.reflect.Field field = menu.getClass().getDeclaredField("mPopup");
             field.setAccessible(true);
             Object menuPopupHelper = field.get(menu);
-            menuPopupHelper.getClass()
-                .getDeclaredMethod("setForceShowIcon", boolean.class)
-                .invoke(menuPopupHelper, true);
+            menuPopupHelper
+                    .getClass()
+                    .getDeclaredMethod("setForceShowIcon", boolean.class)
+                    .invoke(menuPopupHelper, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

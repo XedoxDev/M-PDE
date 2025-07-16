@@ -10,11 +10,12 @@ import io.github.rosemoe.sora.langs.textmate.registry.FileProviderRegistry;
 import io.github.rosemoe.sora.langs.textmate.registry.GrammarRegistry;
 import io.github.rosemoe.sora.langs.textmate.registry.ThemeRegistry;
 import io.github.rosemoe.sora.langs.textmate.registry.model.ThemeModel;
+import java.nio.charset.StandardCharsets;
+import net.lingala.zip4j.util.FileUtils;
 import org.eclipse.tm4e.core.registry.IThemeSource;
 import org.xedox.mpde.AppCore;
 import org.xedox.utils.io.Assets;
 import org.xedox.utils.io.FileX;
-import org.xedox.utils.io.IFile;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -98,21 +99,21 @@ public class SoraEditorManager {
     }
 
     public static String[] getLangSourcesList() {
-        File[] sourceFiles = getThemesPathList();
-        if (sourceFiles == null) {
+        File[] languageFiles = getLanguagePathList();
+        if (languageFiles == null) {
             return new String[0];
         }
 
         List<String> validScopes = new ArrayList<>();
         Gson gson = new Gson();
 
-        for (File path : sourceFiles) {
-            if (path == null || !path.exists()) {
+        for (File path : languageFiles) {
+            if (path == null || !path.exists() || !path.isFile() || !FileX.getExtension(path).equals(".json")) {
                 continue;
             }
 
             try {
-                String text = new FileX(path).read();
+                String text = FileX.read(path);
                 if (text == null || text.isEmpty()) {
                     continue;
                 }
@@ -125,7 +126,7 @@ public class SoraEditorManager {
                     }
                 }
             } catch (Exception e) {
-                throw e;
+                e.printStackTrace();
             }
         }
 
@@ -162,14 +163,15 @@ public class SoraEditorManager {
         List<TextmateLanguage> languages = new ArrayList<>();
 
         for (File langFolder : langsList) {
+            if(langFolder.isFile()) continue;
             try {
                 String langName = langFolder.getName();
                 String tmLanguageTemp = "%s.tmLanguage.json";
                 String configurationTemp = "%s.configuration.json";
 
-                IFile tmLanguageFile =
+                FileX tmLanguageFile =
                         new FileX(langFolder, String.format(tmLanguageTemp, langName));
-                IFile configurationFile =
+                FileX configurationFile =
                         new FileX(langFolder, String.format(configurationTemp, langName));
 
                 JsonObject tmLanguageJson;
@@ -181,9 +183,9 @@ public class SoraEditorManager {
                 TextmateLanguage language = new TextmateLanguage();
                 language.name = name;
                 language.scopeName = scope;
-                language.grammar = tmLanguageFile.getFullPath();
+                language.grammar = tmLanguageFile.getAbsolutePath();
                 if (configurationFile.exists()) {
-                    language.languageConfiguration = configurationFile.getFullPath();
+                    language.languageConfiguration = configurationFile.getAbsolutePath();
                 }
 
                 languages.add(language);

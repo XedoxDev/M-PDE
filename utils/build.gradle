@@ -27,6 +27,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:$app_compat_verison") 
+    implementation("androidx.appcompat:appcompat:$app_compat_version") 
     implementation("com.google.android.material:material:$material3_verison")
+    implementation "net.lingala.zip4j:zip4j:$zip4j_version"
 }

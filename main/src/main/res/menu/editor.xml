@@ -25,6 +25,12 @@
                     android:id="@+id/preview"
                     android:title="@string/preview"
                     android:checkable="true"
+                    android:icon="@drawable/code_tags"
+                    android:enabled="false" />
+                <item
+                    android:id="@+id/app"
+                    android:title="@string/app"
+                    android:checkable="true"
                     android:icon="@drawable/code_tags" />
             </group>
         </menu>

@@ -7,14 +7,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import org.xedox.mpde.editor.SoraEditorManager;
 import org.xedox.utils.DialogBuilder;
 import org.xedox.utils.ErrorDialog;
-import org.xedox.utils.io.IFile;
 import org.xedox.utils.io.FileX;
 
 public class AppCore extends Application {
     
-    private static IFile HOME;
-    private static IFile TEXTMATE;
-    private static IFile PROJECTS;
+    private static FileX HOME;
+    private static FileX TEXTMATE;
+    private static FileX PROJECTS;
     private static AppCore appContext;
 
     @Override
@@ -38,15 +37,15 @@ public class AppCore extends Application {
         }
     }
 
-    public static IFile homeDir() {
+    public static FileX homeDir() {
         return HOME;
     }
     
-    public static IFile textmateDir() {
+    public static FileX textmateDir() {
         return TEXTMATE;
     }
     
-    public static IFile projectsDir() {
+    public static FileX projectsDir() {
         return PROJECTS;
     }
     

@@ -28,9 +28,12 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.xedox.filetree.widget.FileTreeView;
+import org.xedox.mpde.build.BuildTask;
 import org.xedox.mpde.drawer.DrawerManager;
 import org.xedox.mpde.editor.EditorManager;
+import org.xedox.mpde.output.ToolsView;
 import org.xedox.mpde.project.Project;
+import org.xedox.utils.ErrorDialog;
 import org.xedox.utils.io.FileX;
 
 public class EditorActivity extends AppCompatActivity {
@@ -49,10 +52,13 @@ public class EditorActivity extends AppCompatActivity {
 
     private final Map<Integer, Boolean> menuItemsVisibility = new HashMap<>();
     private final Map<Integer, Drawable> menuItemsIcon = new HashMap<>();
-    
+
     private Project project = null;
-    private String buildType = "Preview";
-    private int itemBuild = R.id.preview;
+    private String buildType = "App";
+    private int itemBuild = R.id.app;
+
+    private ToolsView toolsView;
+    private BuildTask buildTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,7 @@ public class EditorActivity extends AppCompatActivity {
         drawerPager = findViewById(R.id.drawer_pager);
         emptyEditorView = findViewById(R.id.editor_no_files);
         navigationView = findViewById(R.id.navigation_view);
+        toolsView = findViewById(R.id.tools_view);
         setSupportActionBar(toolbar);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0);
@@ -75,9 +82,9 @@ public class EditorActivity extends AppCompatActivity {
 
         openProject(null);
     }
-    
+
     public void loadFileTree(FileTreeView treeView) {
-    	this.fileTree = treeView;
+        this.fileTree = treeView;
     }
 
     @Override
@@ -106,11 +113,27 @@ public class EditorActivity extends AppCompatActivity {
             return true;
         }
         int id = item.getItemId();
-        
-        if(id == R.id.preview) {
+
+        if (id == R.id.preview) {
             buildType = "Preview";
             itemBuild = R.id.preview;
             updateItemIcon(R.id.run_type, item.getIcon());
+        } else if (id == R.id.app) {
+            buildType = "App";
+            itemBuild = R.id.app;
+            updateItemIcon(R.id.run_type, item.getIcon());
+        } else if (id == R.id.run) {
+            try {
+                if (buildType == "App") {
+                    if (buildTask == null)
+                    toolsView.getBuildOutput().output.setText("");
+                        buildTask =
+                                new BuildTask(this, toolsView.getBuildOutput().getPrintStream());
+                    buildTask.startBuild(project);
+                }
+            } catch (Exception err) {
+                ErrorDialog.show(this, err);
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -135,7 +158,7 @@ public class EditorActivity extends AppCompatActivity {
         menuItemsVisibility.put(itemId, visible);
         invalidateOptionsMenu();
     }
-    
+
     public void updateItemIcon(int itemId, Drawable drawable) {
         menuItemsIcon.put(itemId, drawable);
         invalidateOptionsMenu();

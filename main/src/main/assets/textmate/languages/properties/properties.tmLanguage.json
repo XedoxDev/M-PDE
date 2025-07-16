@@ -1,0 +1,43 @@
+{
+  "name": "Properties",
+  "scopeName": "source.properties",
+  "patterns": [
+    {"include": "#comments"},
+    {"include": "#base"},
+    {"include": "#values"}
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment",
+          "match": "[#!].*$"
+        }
+      ]
+    },
+    "base": {
+      "patterns": [
+        { // KEY //
+          "name": "constant.other",
+          "match": "^([^=]+)(?==)"
+        }
+      ]
+    },
+    "values": {
+      "patterns": [
+        { // CONSTANT //
+          "name": "constant.language",
+          "match": "\\b(true|false)\\b"
+        },
+        { // NUMBER //
+          "name": "constant.numeric",
+          "match": "\\b((\\d[\\d_]*(\\.[\\d_]+)?([eE][+-]?\\d+)?|0[xX][a-fA-F\\d_]+))$"
+        },
+        {
+          "name": "string",
+          "match": "(/[a-zA-Z\\d_\\.]+(?=/))|(/[a-zA-Z\\d_\\.]+$)"
+        }
+      ]
+    }
+  }
+}

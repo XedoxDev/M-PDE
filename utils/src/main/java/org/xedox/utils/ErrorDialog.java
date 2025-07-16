@@ -70,7 +70,7 @@ public final class ErrorDialog {
             return "StackTrace not available";
         }
 
-        StringBuilder sb = new StringBuilder(512); // Initial capacity for stack traces
+        StringBuilder sb = new StringBuilder(512); 
         sb.append(error.getClass().getSimpleName());
 
         if (error.getMessage() != null) {

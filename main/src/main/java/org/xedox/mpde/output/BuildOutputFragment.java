@@ -16,7 +16,7 @@ import org.xedox.utils.ErrorDialog;
 
 public class BuildOutputFragment extends BaseFragment {
 
-    private SoraEditor output;
+    public SoraEditor output;
     private String title = "null";
     private SoraEditor.PrintStream printStream;
 

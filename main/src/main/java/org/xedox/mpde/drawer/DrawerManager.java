@@ -23,7 +23,10 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.stream.Stream;
 import org.xedox.filetree.adapter.FileTreeAdapter;
+import org.xedox.mpde.AppCore;
+import org.xedox.mpde.dialogs.CreateProjectDialog;
 import org.xedox.mpde.editor.EditorManager;
+import org.xedox.mpde.project.Project;
 import org.xedox.utils.Disposable;
 import org.xedox.utils.ErrorDialog;
 import org.xedox.filetree.utils.Node;
@@ -33,6 +36,7 @@ import org.xedox.mpde.R;
 import org.xedox.mpde.dialogs.NewFileDialog;
 import org.xedox.mpde.dialogs.RenameFileDialog;
 import org.xedox.utils.OverflowMenu;
+import org.xedox.utils.io.FileX;
 
 public class DrawerManager extends BaseDrawerManager {
 
@@ -139,6 +143,24 @@ public class DrawerManager extends BaseDrawerManager {
                     fileTree.turnOnLines = true;
                     fileTree.setOnFileLongClickListener(
                             (node, file, view) -> {
+                                if (!node.isFile && file.getName().equals("projects")) {
+                                    OverflowMenu.show(
+                                            context,
+                                            view,
+                                            R.menu.projects_folder,
+                                            (item) -> {
+                                                int id = item.getItemId();
+                                                if (id == R.id.create_project) {
+                                                    CreateProjectDialog.show(
+                                                            context, fileTree, node);
+                                                }
+                                                if (id == R.id.clear) {
+                                                    FileX.deleteDirectory(AppCore.projectsDir());
+                                                    AppCore.projectsDir().mkdirs();
+                                                }
+                                            });
+                                    return;
+                                }
                                 OverflowMenu.show(
                                         context,
                                         view,
@@ -156,6 +178,7 @@ public class DrawerManager extends BaseDrawerManager {
         fileTree.setIcon(".json", R.drawable.json);
         fileTree.setIcon(".java", R.drawable.java);
         fileTree.setIcon(".pde", R.drawable.processing);
+        fileTree.setIcon(".properties", R.drawable.file_config);
     }
 
     protected void handleOnFileLongClickMenu(MenuItem item, Node node, File file) {
@@ -191,9 +214,9 @@ public class DrawerManager extends BaseDrawerManager {
             } else {
                 if (id == R.id.new_file_folder) {
                     NewFileDialog.show(context, fileTree, node);
-                    /*} else if (id == R.id.import_file) {
-                        importFile(file);
-                    */ } else if (id == R.id.open_as_project) {
+                } else if (id == R.id.import_file) {
+                    importFile(file);
+                } else if (id == R.id.open_as_project) {
                     context.openProject(node.fullPath);
                 }
             }

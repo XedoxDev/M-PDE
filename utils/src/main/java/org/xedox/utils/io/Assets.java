@@ -6,6 +6,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.zip.ZipException;
+import net.lingala.zip4j.ZipFile;
 
 public final class Assets {
     private final Context context;
@@ -169,13 +171,34 @@ public final class Assets {
         return lines;
     }
 
-    private void copyStreamToFile(InputStream is, File targetFile) throws IOException {
+    public static void copyStreamToFile(InputStream is, File targetFile) throws IOException {
         try (OutputStream os = new FileOutputStream(targetFile)) {
             byte[] buffer = new byte[8192];
             int length;
             while ((length = is.read(buffer)) > 0) {
                 os.write(buffer, 0, length);
             }
+        }
+    }
+
+    public static void unzipFromAssets(Context context, String assetZipName, String destinationPath)
+            throws IOException, ZipException {
+        File tempZipFile = new File(context.getCacheDir(), "temp.res.zip");
+        tempZipFile.createNewFile();
+
+        try (InputStream is = context.getAssets().open(assetZipName)) {
+            copyStreamToFile(is, tempZipFile);
+        }
+
+        if (!tempZipFile.exists()) {
+            throw new IOException("Failed to create temp ZIP file.");
+        }
+
+        try {
+            ZipFile zipFile = new ZipFile(tempZipFile);
+            zipFile.extractAll(destinationPath);
+        } finally {
+            tempZipFile.delete();
         }
     }
 }

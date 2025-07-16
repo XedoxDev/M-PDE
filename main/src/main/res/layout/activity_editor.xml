@@ -26,33 +26,72 @@
                 android:layout_width="match_parent"
                 android:layout_below="@+id/toolbar"
                 android:id="@+id/tabs_and_pager">
+
                 <include
-                    android:id="@+id/editor_no_files"
-                    layout="@layout/editor_no_files_layout" />
-                <com.google.android.material.tabs.TabLayout
+                    layout="@layout/editor_no_files_layout"
+                    android:id="@+id/editor_no_files" />
+
+                <RelativeLayout
+                    android:id="@+id/tabs_undo_redo"
                     android:layout_height="40dp"
-                    android:layout_width="match_parent"
-                    android:id="@+id/editor_tab_layout"
-                    app:tabGravity="start"
-                    app:tabMode="scrollable"
-                    android:background="@color/background"
-                    app:tabInlineLabel="true" />
+                    android:layout_width="match_parent">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        app:tabMode="scrollable"
+                        android:background="@color/background"
+                        android:layout_toLeftOf="@+id/undo_redo"
+                        app:tabInlineLabel="true"
+                        app:tabGravity="start"
+                        android:id="@+id/editor_tab_layout" />
+
+                    <LinearLayout
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/undo_redo">
+
+                        <View
+                            android:layout_height="match_parent"
+                            android:layout_width="1dp"
+                            android:background="@color/divider"
+                            android:padding="4dp" />
+
+                        <ImageButton
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/undo"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:id="@+id/undo" />
+
+                        <ImageButton
+                            android:layout_height="match_parent"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/redo"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:id="@+id/redo" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/editor_pager"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_below="@+id/editor_tab_layout" />
+                    android:layout_below="@+id/tabs_undo_redo"
+                    android:id="@+id/editor_pager" />
 
             </RelativeLayout>
 
         </RelativeLayout>
+
         <org.xedox.mpde.output.ToolsView
-            android:id="@+id/console_layout"
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_below="@id/toolbar"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/toolbar" />
+            android:id="@+id/tools_view" />
 
     </RelativeLayout>
 
@@ -70,16 +109,16 @@
             <com.google.android.material.tabs.TabLayout
                 android:layout_height="40dp"
                 android:layout_width="match_parent"
-                android:id="@+id/drawer_tab_layout"
+                app:tabMode="scrollable"
                 app:tabGravity="start"
-                app:tabMode="scrollable" />
+                android:id="@+id/drawer_tab_layout" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_below="@+id/drawer_tab_layout"
-                android:id="@+id/drawer_pager"
-                android:padding="6dp" />
+                android:padding="6dp"
+                android:id="@+id/drawer_pager" />
 
         </RelativeLayout>
 

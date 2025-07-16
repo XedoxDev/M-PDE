@@ -6,7 +6,7 @@ plugins {
 
 allprojects {
     ext {
-        app_compat_verison = "1.7.0"
+        app_compat_version = "1.7.0"
         material3_verison = "1.13.0-alpha01"
         sora_editor_verison = "0.23.5"
         desugar_jdk_libs = "2.1.5"

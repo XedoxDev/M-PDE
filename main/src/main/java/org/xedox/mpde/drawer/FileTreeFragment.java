@@ -19,7 +19,7 @@ public class FileTreeFragment extends BaseFragment {
     public static FileTreeFragment newInstance(@Nullable String path) {
         FileTreeFragment fragment = new FileTreeFragment();
         Bundle args = new Bundle();
-        args.putString("path", path != null ? path : AppCore.homeDir().getFullPath());
+        args.putString("path", path != null ? path : AppCore.homeDir().getAbsolutePath());
         fragment.setArguments(args);
         return fragment;
     }

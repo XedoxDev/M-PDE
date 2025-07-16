@@ -9,6 +9,8 @@
     <string name="close_other">Close other</string>
     <string name="close_all">Close all</string>
     <string name="save">Save</string>
+    <string name="app">Application</string>
+    <string name="clear">Clear</string>
     <string name="build_logs">Build logs</string>
     <string name="create">Create</string>
     <string name="tool_window_hint">Swipe up for open output</string>
@@ -32,7 +34,8 @@
     <string name="import_file">Import file</string>
     <string name="file">File</string>
     <string name="folder">Folder</string>
-    <string name="open_as_project">Open as project</string>
+    <string name="create_project">Create project</string>
+    <string name="open_as_project"><string name="folder">Folder</string> as project</string>
     <string name="run_type">Build type</string>
     <string name="preview">Preview</string>
     <string name="run">Run</string>

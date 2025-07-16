@@ -46,14 +46,6 @@ public class ApkBuilder {
         this.taskManager = new TaskManager(Objects.requireNonNull(printStream));
         String nativeDir = context.getApplicationInfo().nativeLibraryDir;
         aapt2Binary = new File(nativeDir, "libaapt2.so");
-        debugCommands = config.debugMode;
-        taskManager.setVerbose(config.debugMode);
-
-        this.compiledResDir = new File(config.buildPath, "compiled_res");
-        this.genDir = new File(config.buildPath, "gen");
-        this.outputApk = new File(genDir, "resources.ap_");
-        this.classesDir = new File(config.buildPath, "classes");
-        this.dexDir = new File(config.buildPath, "dex");
     }
 
     public interface BuildListener {
@@ -80,6 +72,13 @@ public class ApkBuilder {
 
     public void build(BuildConfig config) {
         this.config = config;
+        debugCommands = config.debugMode;
+        taskManager.setVerbose(config.debugMode);
+        this.compiledResDir = new File(config.buildPath, "compiled_res");
+        this.genDir = new File(config.buildPath, "gen");
+        this.outputApk = new File(genDir, "resources.ap_");
+        this.classesDir = new File(config.buildPath, "classes");
+        this.dexDir = new File(config.buildPath, "dex");
         if (buildListener != null) {
             buildListener.onBuildStarted();
         }

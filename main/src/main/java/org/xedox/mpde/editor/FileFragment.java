@@ -26,7 +26,6 @@ import java.util.Objects;
 import org.xedox.mpde.R;
 import org.xedox.utils.ErrorDialog;
 import org.xedox.utils.io.FileX;
-import org.xedox.utils.io.IFile;
 import org.xedox.utils.BaseFragment;
 
 public class FileFragment extends BaseFragment {
@@ -35,7 +34,7 @@ public class FileFragment extends BaseFragment {
     private static final Handler handler = new Handler(Looper.getMainLooper());
 
     private File file;
-    private SoraEditor editor;
+    public SoraEditor editor;
     private String originalText;
     private String title;
     private SubscriptionReceipt<ContentChangeEvent> contentChangeSubscriber;
@@ -48,22 +47,23 @@ public class FileFragment extends BaseFragment {
     }
 
     static {
-        String[] scopes = SoraEditorManager.getLangSourcesList();
-        for (String item : scopes) {
-            String extension = item.substring(item.lastIndexOf("."));
-            EXTENSION_MAPPING.put(extension, "source" + extension);
-        }
+        EXTENSION_MAPPING.put(".pde", "source.java");
+        EXTENSION_MAPPING.put(".txt", "source.txt");
+        EXTENSION_MAPPING.put(".java", "source.java");
+        EXTENSION_MAPPING.put(".properties", "source.properties");
+        EXTENSION_MAPPING.put(".xml", "source.xml");
+        EXTENSION_MAPPING.put(".json", "source.json");
+        EXTENSION_MAPPING.put(".txt", "source.txt");
     }
 
     public static FileFragment newInstance(File file) {
         return newInstance(file, null);
     }
-    
+
     public static FileFragment newInstance(File file, Drawable icon) {
         FileFragment fragment = new FileFragment();
         fragment.setFile(file);
-        if(icon != null) 
-        fragment.setIcon(icon);
+        if (icon != null) fragment.setIcon(icon);
         return fragment;
     }
 
@@ -98,8 +98,8 @@ public class FileFragment extends BaseFragment {
 
     private void loadFileContent() {
         try {
-            IFile ifile = new FileX(file);
-            originalText = ifile.read();
+            FileX FileX = new FileX(file);
+            originalText = FileX.read();
             editor.setText(originalText);
             isModified = false;
             updateTabTitle();
@@ -175,9 +175,13 @@ public class FileFragment extends BaseFragment {
     }
 
     public String getText() {
-        return editor != null
-                ? editor.getText().toString()
-                : file != null ? new FileX(file).read() : "";
+        try {
+            return editor != null
+                    ? editor.getText().toString()
+                    : file != null ? new FileX(file).read() : "";
+        } catch (Exception err) {
+            return "";
+        }
     }
 
     public OnEditorTextChangeListener getOnEditorTextChangeListener() {

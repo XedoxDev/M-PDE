@@ -10,9 +10,9 @@
     <item
         android:id="@+id/new_file_folder"
         android:title="@string/create_new_file_folder" />
-
-    <!-- indev -->
-    <!-- <item android:id="@+id/import_file" android:title="@string/import_file" /> -->
+    <item
+        android:id="@+id/import_file"
+        android:title="@string/import_file" />
     <item
         android:id="@+id/open_as_project"
         android:title="@string/open_as_project" />
